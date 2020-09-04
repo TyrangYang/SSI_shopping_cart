@@ -1,0 +1,10 @@
+.productListItem {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.productListItem img {
+    width: 10vh;
+    height: 10vh;
+}

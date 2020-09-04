@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "product1",
+        "image": "https://www.kfc.ca/Content/OnlineOrderingImages/StaticPage/story/story_28_lrg.jpg",
+        "description": "content1",
+        "price": 1.99,
+        "discount": 0.35
+    },
+    {
+        "id": 2,
+        "name": "product2",
+        "image": "https://www.kfc.ca/Content/OnlineOrderingImages/StaticPage/story/story_28_lrg.jpg",
+        "description": "content2",
+        "price": 100.99,
+        "discount": 0
+    },
+    {
+        "id": 3,
+        "name": "product3",
+        "image": "https://www.kfc.ca/Content/OnlineOrderingImages/StaticPage/story/story_28_lrg.jpg",
+        "description": "content3",
+        "price": 21.99,
+        "discount": 0.15
+    },
+    {
+        "id": 4,
+        "name": "product4",
+        "image": "https://www.kfc.ca/Content/OnlineOrderingImages/StaticPage/story/story_28_lrg.jpg",
+        "description": "content4",
+        "price": 91.99,
+        "discount": 0.2
+    },
+    {
+        "id": 5,
+        "name": "product5",
+        "image": "https://www.kfc.ca/Content/OnlineOrderingImages/StaticPage/story/story_28_lrg.jpg",
+        "description": "content5",
+        "price": 11.99,
+        "discount": 0.12
+    }
+]
