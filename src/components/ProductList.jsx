@@ -7,12 +7,14 @@ import '../css/ProductList.css';
 export default function ProductList() {
     const [allProducts, setAllProducts] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showCheckout, setShowCheckout] = useState(false);
 
     useEffect(() => {
         // fetch data
         fakeData.forEach((e) => (e.quantity = 1));
         setAllProducts(fakeData);
         setIsLoaded(true);
+
         return () => {};
     }, []);
 
@@ -86,10 +88,19 @@ export default function ProductList() {
 
             <div className="btnBoard">
                 <button>continue shopping</button>
-                <button>checkout</button>
+                <button
+                    onClick={() => {
+                        setShowCheckout(!showCheckout);
+                    }}
+                >
+                    checkout
+                </button>
             </div>
-
-            <CheckoutModule />
+            {showCheckout ? (
+                <CheckoutModule setShowCheckout={setShowCheckout} />
+            ) : (
+                ''
+            )}
         </div>
     );
 }
