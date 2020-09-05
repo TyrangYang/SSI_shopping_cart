@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ProductListItem from './ProductListItem';
+import CheckoutModule from './Checkout';
 import fakeData from '../fakeData.json';
 import '../css/ProductList.css';
 
 export default function ProductList() {
     const [allProducts, setAllProducts] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
         // fetch data
         fakeData.forEach((e) => (e.quantity = 1));
@@ -14,11 +16,24 @@ export default function ProductList() {
         return () => {};
     }, []);
 
+    const totalPrice = useMemo(() => {
+        return (
+            Math.ceil(
+                allProducts.reduce((prev, cur) => {
+                    return (
+                        prev +
+                        cur.quantity * cur.price * 100 * (1 - cur.discount)
+                    );
+                }, 0)
+            ) / 100
+        );
+    }, [allProducts]);
+
     // change product quantity
-    let changeProductQuantity = (id, quantity) => {
+    const changeProductQuantity = (id, quantity) => {
         let newAllProducts = allProducts.map((product) => {
             if (id === product.id) {
-                product.quantity = quantity;
+                product.quantity = +quantity;
             }
             return product;
         });
@@ -27,7 +42,7 @@ export default function ProductList() {
     };
 
     // delete a product
-    let deleteProduct = (id) => {
+    const deleteProduct = (id) => {
         setAllProducts(allProducts.filter((product) => id !== product.id));
     };
 
@@ -36,16 +51,45 @@ export default function ProductList() {
     // display data
     return (
         <div>
-            <ul className="productList">
-                {allProducts.map((product) => (
-                    <ProductListItem
-                        product={product}
-                        key={product.id}
-                        changeProductQuantity={changeProductQuantity}
-                        deleteProduct={deleteProduct}
-                    />
-                ))}
-            </ul>
+            <table className="productList">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Discount</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {/* <sdiv className="productList"> */}
+                    {allProducts.map((product) => (
+                        <ProductListItem
+                            product={product}
+                            key={product.id}
+                            changeProductQuantity={changeProductQuantity}
+                            deleteProduct={deleteProduct}
+                        />
+                    ))}
+                    {/* </div> */}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>Total: ${totalPrice}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div className="btnBoard">
+                <button>continue shopping</button>
+                <button>checkout</button>
+            </div>
+
+            <CheckoutModule />
         </div>
     );
 }

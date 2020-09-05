@@ -1,10 +1,12 @@
-.productListItem {
+.productListItem > td {
+    border-bottom: 1px #ddd solid;
+}
+.productContent {
     display: flex;
-    justify-content: space-around;
     align-items: center;
 }
 
-.productListItem img {
+.productContent img {
     width: 10vh;
     height: 10vh;
 }

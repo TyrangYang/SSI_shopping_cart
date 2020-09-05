@@ -1,9 +1,30 @@
 .productList {
-    width: 70%;
-
-    display: flex;
-    flex-direction: column;
-
+    width: 90%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    vertical-align: center;
+    text-align: left;
     padding: 5px;
+    margin: auto;
+}
+
+.productList > thead > tr > th {
+    font-size: 20px;
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+}
+.productList > tfoot > tr > td {
+    border-top: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+}
+
+.productList > tbody > tr:hover {
+    background-color: #eee;
+}
+
+.btnBoard {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
     margin: auto;
 }
