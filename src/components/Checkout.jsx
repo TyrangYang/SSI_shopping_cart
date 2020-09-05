@@ -40,8 +40,9 @@ export default function Checkout({ setShowCheckout }) {
     return (
         <div
             className="checkoutCardContainer"
-            onClick={() => {
-                setShowCheckout(false);
+            onClick={(e) => {
+                if (e.target.className === 'checkoutCardContainer')
+                    setShowCheckout(false);
             }}
         >
             <div className="checkoutCard">

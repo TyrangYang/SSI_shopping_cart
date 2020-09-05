@@ -17,7 +17,7 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "clean": "rm -rf build node_modules",
-        "predeply": "npm run build",
+        "predeploy": "npm run build",
         "deploy": "npx gh-pages -d build"
     },
     "eslintConfig": {
