@@ -46,21 +46,18 @@
     justify-content: center;
     align-items: stretch;
     margin: 10px;
-    border: 1px #f00 solid;
 }
 
 .inputGroup {
     width: 100%;
-    /* border: 1px #f00 solid; */
 }
 
 .inputGroup > label {
-    /* border: 1px #f00 solid; */
     display: block;
 }
 
-.inputGroup > input[type='text'] {
-}
+/* .inputGroup > input[type='text'] {
+} */
 
 .bankAccountDetailContainer {
     display: flex;

@@ -20,4 +20,4 @@
 -   [x] Item deletable
 -   [ ] Item has inventory
 -   [x] Table foot: continue shopping(dummy), Checkout(a modual layer)
--   [ ] Form validation (see the demo)
+-   [x] Form validation (see the demo)

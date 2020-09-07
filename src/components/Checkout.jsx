@@ -88,7 +88,12 @@ export default function Checkout({ setShowCheckout }) {
                             : 'none',
                     }}
                 >
-                    <form>
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            console.log(e);
+                        }}
+                    >
                         <div className="inputGroup">
                             <label htmlFor="creditCard-name">Full Name:</label>
                             <input
@@ -101,13 +106,23 @@ export default function Checkout({ setShowCheckout }) {
 
                         <div className="inputGroup">
                             <label htmlFor="creditCard-card-num">
-                                Card Name:
+                                Card number:
                             </label>
                             <input
-                                type="text"
+                                type="tel"
                                 placeholder="Enter A Card Number"
                                 name="creditCard-card-num"
                                 id="creditCard-card-num"
+                                minLength="16"
+                                maxLength="16"
+                                onChange={(e) => {
+                                    // add a space between every four digit
+                                    e.target.value = e.target.value
+                                        .replace(/\W/gi, '')
+                                        .replace(/(.{4})/g, '$1 ')
+                                        .trim();
+                                }}
+                                required
                             />
                         </div>
 
@@ -116,20 +131,36 @@ export default function Checkout({ setShowCheckout }) {
                                 Expiration:
                             </label>
                             <input
-                                type="number"
+                                type="tel"
                                 placeholder="MM"
                                 id="creditCard-month"
+                                minLength="2"
+                                maxLength="2"
+                                pattern="0[1-9]|1[0,1,2]"
+                                required
                             />
-                            <input type="number" placeholder="YY" />
+                            <input
+                                type="tel"
+                                placeholder="YY"
+                                id="creditCard-year"
+                                minLength="2"
+                                maxLength="2"
+                                pattern="[0-9][0-9]"
+                                required
+                            />
                         </div>
 
                         <div className="inputGroup">
                             <label htmlFor="creditCard-CCV">CCV:</label>
                             <input
-                                type="number"
+                                type="tel"
                                 placeholder="CCV"
                                 name="creditCard-CCV"
                                 id="creditCard-CCV"
+                                minLength="3"
+                                maxLength="3"
+                                pattern="\d{3}"
+                                required
                             />
                         </div>
 
