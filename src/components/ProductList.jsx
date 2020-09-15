@@ -9,7 +9,7 @@ import { Button } from '@material-ui/core';
 export default function ProductList() {
     const [allProducts, setAllProducts] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [showCheckout, setShowCheckout] = useState(true);
+    const [showCheckout, setShowCheckout] = useState(false);
 
     useEffect(() => {
         // fetch data

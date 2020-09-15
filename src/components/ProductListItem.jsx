@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/ProductListItem.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { Select } from '@material-ui/core';
 
 export default function ProductListItem({
     product,
@@ -30,16 +31,16 @@ export default function ProductListItem({
                 <p>{product.description}</p>
             </td>
             <td>
-                <select
+                <Select
                     name="quantity"
                     id="item-quantity"
-                    value={'' + product.quantity}
+                    value={product.quantity}
                     onChange={handleQuantityChange}
                 >
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
+                    <option value={1}>1</option>
+                    <option value={2}>2</option>
+                    <option value={3}>3</option>
+                </Select>
             </td>
             <td>
                 <p>
