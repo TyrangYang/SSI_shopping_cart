@@ -10,15 +10,11 @@
 }
 
 .checkoutCard {
-    width: 40%;
     background-color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    border: 3px #000 solid;
     border-radius: 5px;
+}
+.checkoutCard > h1 {
+    text-align: center;
 }
 
 .checkoutCard > ul {
@@ -28,10 +24,6 @@
     list-style: none;
     padding-left: 0px;
     text-align: center;
-}
-
-.checkoutCard > ul > li {
-    border: 1px #000 solid;
 }
 
 .checkoutCard > ul > li:nth-child(3) {

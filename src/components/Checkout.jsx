@@ -1,42 +1,19 @@
 import React, { useState } from 'react';
 import '../css/checkout.css';
 
+import {
+    Container,
+    Button,
+    TextField,
+    FormGroup,
+    Checkbox,
+    FormControlLabel,
+} from '@material-ui/core';
+
 export default function Checkout({ setShowCheckout }) {
-    const [cardDisplayOption, setCardDisplayOption] = useState({
-        formDisplay: true,
-        payPalDisplay: false,
-        bankAccountDisplay: false,
-    });
-
-    const handleSwitchButtonClick = (e) => {
-        if (e.target.id === 'card1') {
-            setCardDisplayOption({
-                formDisplay: true,
-                payPalDisplay: false,
-                bankAccountDisplay: false,
-            });
-            return;
-        }
-
-        if (e.target.id === 'card2') {
-            setCardDisplayOption({
-                formDisplay: false,
-                payPalDisplay: true,
-                bankAccountDisplay: false,
-            });
-            return;
-        }
-
-        if (e.target.id === 'card3') {
-            setCardDisplayOption({
-                formDisplay: false,
-                payPalDisplay: false,
-                bankAccountDisplay: true,
-            });
-            return;
-        }
-    };
-
+    const [formDisplay, setFormDisplay] = useState(true);
+    const [payPalDisplay, setPayPalDisplay] = useState(false);
+    const [bankAccountDisplay, setBankAccountDisplay] = useState(false);
     return (
         <div
             className="checkoutCardContainer"
@@ -45,147 +22,164 @@ export default function Checkout({ setShowCheckout }) {
                     setShowCheckout(false);
             }}
         >
-            <div className="checkoutCard">
-                <h1>checkout</h1>
+            <Container maxWidth="sm" className="checkoutCard">
+                <h1>CHECKOUT</h1>
 
                 <ul>
-                    <li
-                        className={
-                            cardDisplayOption.formDisplay ? 'btn1' : 'btn2'
-                        }
-                        onClick={handleSwitchButtonClick}
-                        id="card1"
-                    >
-                        Credit Card
+                    <li>
+                        <Button
+                            variant={formDisplay ? 'contained' : 'outlined'}
+                            color="primary"
+                            onClick={() => {
+                                setFormDisplay(true);
+                                setPayPalDisplay(false);
+                                setBankAccountDisplay(false);
+                            }}
+                            fullWidth
+                        >
+                            Credit Card
+                        </Button>
                     </li>
-                    <li
-                        className={
-                            cardDisplayOption.payPalDisplay ? 'btn1' : 'btn2'
-                        }
-                        onClick={handleSwitchButtonClick}
-                        id="card2"
-                    >
-                        PayPal
+                    <li>
+                        <Button
+                            variant={payPalDisplay ? 'contained' : 'outlined'}
+                            color="primary"
+                            onClick={() => {
+                                setFormDisplay(false);
+                                setPayPalDisplay(true);
+                                setBankAccountDisplay(false);
+                            }}
+                            fullWidth
+                        >
+                            PayPal
+                        </Button>
                     </li>
-                    <li
-                        className={
-                            cardDisplayOption.bankAccountDisplay
-                                ? 'btn1'
-                                : 'btn2'
-                        }
-                        onClick={handleSwitchButtonClick}
-                        id="card3"
-                    >
-                        Bank Transfer
+                    <li>
+                        <Button
+                            variant={
+                                bankAccountDisplay ? 'contained' : 'outlined'
+                            }
+                            color="primary"
+                            onClick={() => {
+                                setFormDisplay(false);
+                                setPayPalDisplay(false);
+                                setBankAccountDisplay(true);
+                            }}
+                            fullWidth
+                        >
+                            Bank Transfer
+                        </Button>
                     </li>
                 </ul>
 
                 <div
                     className="creditCardFormContainer"
                     style={{
-                        display: cardDisplayOption.formDisplay
-                            ? 'flex'
-                            : 'none',
+                        display: formDisplay ? 'flex' : 'none',
                     }}
                 >
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            console.log(e);
+                            console.dir(e.target);
                         }}
                     >
-                        <div className="inputGroup">
-                            <label htmlFor="creditCard-name">Full Name:</label>
-                            <input
-                                type="text"
-                                placeholder="Enter FullName"
-                                name="creditCard-name"
-                                id="creditCard-name"
-                            />
-                        </div>
+                        <TextField
+                            id="creditCard-name"
+                            name="creditCard-name"
+                            placeholder="Enter FullName"
+                            label="Null Name:"
+                            required
+                        />
+                        <TextField
+                            id="creditCard-card-num"
+                            name="creditCard-card-num"
+                            placeholder="Enter A Card Number"
+                            type="tel"
+                            label="Card number:"
+                            onChange={(e) => {
+                                // add a space between every four digit
+                                e.target.value = e.target.value
+                                    .replace(/\W/gi, '')
+                                    .replace(/(.{4})/g, '$1 ')
+                                    .trim();
+                            }}
+                            inputProps={{
+                                minLength: 19,
+                                maxLength: 19,
+                            }}
+                            required
+                        />
 
-                        <div className="inputGroup">
-                            <label htmlFor="creditCard-card-num">
-                                Card number:
-                            </label>
-                            <input
-                                type="tel"
-                                placeholder="Enter A Card Number"
-                                name="creditCard-card-num"
-                                id="creditCard-card-num"
-                                minLength="16"
-                                maxLength="16"
-                                onChange={(e) => {
-                                    // add a space between every four digit
-                                    e.target.value = e.target.value
-                                        .replace(/\W/gi, '')
-                                        .replace(/(.{4})/g, '$1 ')
-                                        .trim();
-                                }}
-                                required
-                            />
-                        </div>
-
-                        <div className="inputGroup">
-                            <label htmlFor="creditCard-month">
-                                Expiration:
-                            </label>
-                            <input
-                                type="tel"
-                                placeholder="MM"
+                        <FormGroup row>
+                            <TextField
                                 id="creditCard-month"
-                                minLength="2"
-                                maxLength="2"
-                                pattern="0[1-9]|1[0,1,2]"
+                                name="creditCard-month"
+                                placeholder="MM"
+                                type="tel"
+                                inputProps={{
+                                    minLength: 2,
+                                    maxLength: 2,
+                                    pattern: '0[1-9]|1[0,1,2]',
+                                }}
+                                label="Month"
                                 required
                             />
-                            <input
-                                type="tel"
-                                placeholder="YY"
+                            <TextField
                                 id="creditCard-year"
-                                minLength="2"
-                                maxLength="2"
-                                pattern="[0-9][0-9]"
-                                required
-                            />
-                        </div>
-
-                        <div className="inputGroup">
-                            <label htmlFor="creditCard-CCV">CCV:</label>
-                            <input
+                                name="creditCard-year"
+                                placeholder="YY"
                                 type="tel"
-                                placeholder="CCV"
-                                name="creditCard-CCV"
-                                id="creditCard-CCV"
-                                minLength="3"
-                                maxLength="3"
-                                pattern="\d{3}"
+                                inputProps={{
+                                    minLength: 2,
+                                    maxLength: 2,
+                                    pattern: '[0-9][0-9]',
+                                }}
+                                label="Year"
                                 required
                             />
-                        </div>
+                        </FormGroup>
 
-                        <div className="inputGroup">
-                            <input
-                                type="checkbox"
-                                name="creditCard-Agree"
-                                id="Agree"
-                                required
-                            />
-                            <label htmlFor="Agree">
-                                Agreed to terms and conditions
-                            </label>
-                        </div>
+                        <TextField
+                            id="creditCard-CCV"
+                            name="creditCard-CCV"
+                            placeholder="CCV"
+                            type="tel"
+                            label="CCV:"
+                            inputProps={{
+                                minLength: 3,
+                                maxLength: 3,
+                                pattern: '\\d{3}',
+                            }}
+                            required
+                        />
 
-                        <button className="btn1">Submit</button>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name="creditCard-Agree"
+                                    id="Agree"
+                                    required
+                                />
+                            }
+                            label="Agreed to terms and conditions"
+                        />
+
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                        >
+                            Submit
+                        </Button>
                     </form>
                 </div>
 
                 <div
                     className="payPalContainer"
                     style={{
-                        display: cardDisplayOption.payPalDisplay
-                            ? 'block'
-                            : 'none',
+                        display: payPalDisplay ? 'block' : 'none',
                     }}
                 >
                     <p>PayPal is the easiest way to pay online</p>
@@ -196,9 +190,7 @@ export default function Checkout({ setShowCheckout }) {
                 <div
                     className="bankAccountDetailContainer"
                     style={{
-                        display: cardDisplayOption.bankAccountDisplay
-                            ? 'block'
-                            : 'none',
+                        display: bankAccountDisplay ? 'block' : 'none',
                     }}
                 >
                     <h2>Bank account Detail</h2>
@@ -211,7 +203,7 @@ export default function Checkout({ setShowCheckout }) {
                     <h3>Note:</h3>
                     <p>Here are some notes.</p>
                 </div>
-            </div>
+            </Container>
         </div>
     );
 }

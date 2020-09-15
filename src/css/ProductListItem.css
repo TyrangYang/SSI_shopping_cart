@@ -10,3 +10,22 @@
     width: 10vh;
     height: 10vh;
 }
+
+.actionBoard {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.actionBtn {
+    font-size: 25px;
+}
+
+.actionBtn:hover {
+    cursor: pointer;
+}
+
+.actionBtn:nth-child(2):hover {
+    transform: rotate(0.5turn);
+    transition: 0.5s ease;
+}

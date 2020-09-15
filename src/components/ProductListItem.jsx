@@ -1,22 +1,24 @@
 import React from 'react';
 import '../css/ProductListItem.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductListItem({
     product,
     changeProductQuantity,
     deleteProduct,
 }) {
-    let handleQuantityChange = (e) => {
+    const handleQuantityChange = (e) => {
         changeProductQuantity(product.id, +e.target.value);
     };
 
-    let clickDeleteButton = () => {
+    const clickDeleteButton = () => {
         if (window.confirm('delete?')) {
             deleteProduct(product.id);
         }
     };
 
-    let clickRefreshButton = () => {
+    const clickRefreshButton = () => {
         changeProductQuantity(product.id, 1);
     };
 
@@ -52,8 +54,18 @@ export default function ProductListItem({
                 </p>
             </td>
             <td>
-                <button onClick={clickDeleteButton}>delete</button>
-                <button onClick={clickRefreshButton}>refresh</button>
+                <div className="actionBoard">
+                    <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        onClick={clickDeleteButton}
+                        className="actionBtn"
+                    />
+                    <FontAwesomeIcon
+                        icon={faSyncAlt}
+                        onClick={clickRefreshButton}
+                        className="actionBtn"
+                    />
+                </div>
             </td>
         </tr>
     );

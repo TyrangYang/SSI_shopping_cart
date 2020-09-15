@@ -4,10 +4,12 @@ import CheckoutModule from './Checkout';
 import fakeData from '../fakeData.json';
 import '../css/ProductList.css';
 
+import { Button } from '@material-ui/core';
+
 export default function ProductList() {
     const [allProducts, setAllProducts] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [showCheckout, setShowCheckout] = useState(false);
+    const [showCheckout, setShowCheckout] = useState(true);
 
     useEffect(() => {
         // fetch data
@@ -64,7 +66,6 @@ export default function ProductList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* <sdiv className="productList"> */}
                     {allProducts.map((product) => (
                         <ProductListItem
                             product={product}
@@ -73,7 +74,6 @@ export default function ProductList() {
                             deleteProduct={deleteProduct}
                         />
                     ))}
-                    {/* </div> */}
                 </tbody>
                 <tfoot>
                     <tr>
@@ -87,14 +87,18 @@ export default function ProductList() {
             </table>
 
             <div className="btnBoard">
-                <button>continue shopping</button>
-                <button
+                <Button variant="contained" color="primary">
+                    continue shopping
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
                     onClick={() => {
                         setShowCheckout(!showCheckout);
                     }}
                 >
                     checkout
-                </button>
+                </Button>
             </div>
             {showCheckout ? (
                 <CheckoutModule setShowCheckout={setShowCheckout} />
